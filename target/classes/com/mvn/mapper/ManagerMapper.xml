@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" > 
+<mapper namespace = "com.mvn.dao.ManagerMapper">
+	<resultMap type="com.mvn.model.Manager" id="baseData">
+		<id column="id" property="id"/>
+		<result column="faculty_name" property="facultyName"/>
+		<result column="faculty_no" property="facultyNo"/>
+		<result column="faculty_phone" property="facultyPhone"/>
+		<result column="pwd" property="pwd"/>
+	</resultMap>
+	<sql id="sqlCon">
+		id,faculty_name,faculty_no,faculty_phone,pwd
+	</sql>
+	
+	<select id="selectAllManager" resultMap="baseData" parameterType="com.mvn.model.Manager">
+		select 
+		<include refid="sqlCon"></include>
+		from manager
+		<if test="pageIndex != null and pageSize != null">
+			limit #{pageIndex},#{pageSize}
+		</if>
+	</select>
+</mapper>

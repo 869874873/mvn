@@ -1,0 +1,23 @@
+<div id="tb" style="padding: 5px; height: auto">
+	<div>
+		<!-- Date From: <input class="easyui-datebox" style="width: 80px">
+		To: <input class="easyui-datebox" style="width: 80px">-->
+		姓名：<input id = "searchName" class="easyui-searchbox" data-options="prompt:'请输入查询姓名',searcher:findUser" style="width: 200px;">
+		<a class="easyui-linkbutton" iconCls="icon-arrow_rotate_anticlockwise" plain="true" onclick="reset()">清空</a>
+	</div>
+	<div style="margin-bottom: 5px">
+		<a class="easyui-linkbutton" iconCls="icon-application_add" plain="true" onclick="openDialog('add')">添加</a> 
+		<a class="easyui-linkbutton" iconCls="icon-application_edit" plain="true" onclick="openDialog('edit')">修改</a> 
+		<a class="easyui-linkbutton" iconCls="icon-application_delete" plain="true" onclick="delAppInfo()">删除</a> 
+		<a class="easyui-linkbutton" iconCls="icon-application" plain="true" onclick="userInformation()">详细信息</a>
+	</div>
+</div>
+<table class="easyui-datagrid " style="width: 100%; height: 91%" id="datagrid" rownumbers="true" pagination="true" data-options="singleSelect:true,collapsible:true, url:'ctrl/user/selectAllUser',method:'get', fitColumns : true,striped : true,pageSize : 20">
+	<thead>
+		<tr>
+			<th data-options="field:'id',width:180,align:'center'">序号</th>
+			<th data-options="field:'name',width:180,align:'center'">姓名</th>
+			<th data-options="field:'pwd',width:180,align:'center'">密码</th>
+		</tr>
+	</thead>
+</table>

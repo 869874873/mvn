@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" > 
+<mapper namespace = "com.mvn.dao.LoginMapper">
+	<resultMap type="com.mvn.model.Manager" id="baseData">
+		<result column="faculty_no" property="facultyNo"/>
+		<result column="faculty_name" property="facultyName"/>
+		<result column="pwd" property="pwd"/>
+	</resultMap>
+	<resultMap type="com.mvn.model.User" id="baseResult">
+		<result column="name" property="name"/>
+		<result column="pwd" property="pwd"/>
+	</resultMap>
+	<select id="loginForUser" resultMap="baseResult" parameterType="com.mvn.model.User">
+		select * from user
+		<where>
+			name = #{name} and pwd = #{pwd}		
+		</where>
+	</select>
+	
+	<select id="loginForManager" resultMap="baseData" parameterType="com.mvn.model.Manager">
+		select * from manager
+		<where>
+			faculty_no = #{name} and pwd = #{pwd}		
+		</where>
+	</select>
+</mapper>

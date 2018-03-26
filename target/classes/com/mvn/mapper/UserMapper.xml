@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" > 
+<mapper namespace = "com.mvn.dao.UserMapper">
+	<resultMap type="com.mvn.model.User" id="baseResult">
+		<id column="id" property="id"/>
+		<result column="name" property="name"/>
+		<result column="pwd" property="pwd"/>
+	</resultMap>
+	<sql id="sqlCon">
+		id,name,pwd
+	</sql>
+	<!-- 查询所有用户信息 -->
+	<select id="selectAllUser" resultMap="baseResult" parameterType="com.mvn.model.User">
+		select
+		<include refid="sqlCon"></include>
+		from user
+		<if test="name != ''">
+			<where>
+				name like '%${name}%'
+			</where>
+		</if>
+		<if test="pageIndex != null and pageSize != null">
+			limit #{pageIndex},#{pageSize}
+		</if>
+	</select>
+	<!-- 查询数据总条数 -->
+	<select id="countUser" resultMap="baseResult" parameterType="com.mvn.model.User">
+		select
+		<include refid="sqlCon"></include>
+		from user
+		<if test="name != ''">
+			<where>
+				name like '%${name}%'
+			</where>
+		</if>
+	</select>
+	<!-- 根据id查询指定用户 -->
+	<select id="selectUserById" resultMap="baseResult" parameterType="com.mvn.model.User">
+		select
+		<include refid="sqlCon"></include>
+		from user 
+		<where>
+			id = #{id}
+		</where>
+	</select>
+	<!-- 删除用户信息 -->
+	<delete id="deleteUser" parameterType="com.mvn.model.User">
+		delete from user 
+		<where> 
+			id = #{id}
+		</where>
+	</delete>
+	<!-- 新增（插入）用户信息 -->
+	<insert id="insertUser" parameterType="com.mvn.model.User">
+		insert into user (name,pwd) values (#{name},#{pwd})
+	</insert>
+	<!-- 修改（更新）用户信息 -->
+	<update id="updateUser" parameterType="com.mvn.model.User">
+		update user set name = #{name},pwd = #{pwd} 
+		<where>
+			id = #{id}
+		</where>
+	</update>
+</mapper>

@@ -1,2 +1,0 @@
-function findFacultyName() {}
-function findFacultyNo() {}
